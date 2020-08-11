@@ -25,8 +25,9 @@ class PidEnv(gym.Env):
         self.kp = action[0] # Increasing p term reduces rise time
         self.ki = action[1]
         self.kd = action[2] # Increasing d term improves stability and decreases overshoot
+        done = False
 
-        while(self.currpoint[0]< self.n or self.done !=1):
+        while(self.currpoint[0]< self.n):
             # max x axis of n points 
             self.proportional = self.kp * self.error
             self.integral += self.ki * self.error * self.sample_rate
@@ -37,17 +38,17 @@ class PidEnv(gym.Env):
             self.last_error = self.error
             self.currpoint[1] += curr_input
             self.currpoint[0] += 1 
-            self.error = self.setpoint - self.currpoint
+            self.error = self.setpoint - float(self.currpoint[1])
             self.xhistory.append(self.currpoint[0])
             self.yhistory.append(self.currpoint[1])
+            if(self.currpoint[0]+1 == self.n):
+                done = True
 
-            if(self.error ==0 and self.last_error == 0):
-                self.done = 1
-
-        reward = -abs(self.error)+ 0.05*float(self.currpoint[0])
+        self.state = (self.proportional, self.integral, self.derivative)
+        reward = -abs(self.error)-0.05*float(self.currpoint[0])
         if reward ==0:
             reward = 10
-        return (self.proportional, self.integral, self.derivative, self.error, self.setpoint), reward
+        return np.array(self.state, dtype =np.float32), reward, done, {}
 
     def reset(self):
         self.error = self.setpoint
@@ -59,6 +60,8 @@ class PidEnv(gym.Env):
         self.kp = 0.5
         self.ki = 0.5
         self.kd = 0.5
+        self.continous = False
+        return self.step(np.array([0,0,0]))[0]
 
     def render(self):
         print("Error: "+str(self.error))

@@ -17,11 +17,12 @@ class PidEnv(gym.Env):
         self.kd = 0.5
         self.n = 250 # Simulation points
         self.done = 0
-        self.xhistory = [0]
-        self.yhistory = [0]
+
 
     def step(self, action):
         self.currpoint = [0, 0]
+        self.xhistory = [0]
+        self.yhistory = [0]
         self.kp = action[0] # Increasing p term reduces rise time
         self.ki = action[1]
         self.kd = action[2] # Increasing d term improves stability and decreases overshoot
@@ -69,3 +70,4 @@ class PidEnv(gym.Env):
         print("Integral Term: "+str(self.integral))
         print("Derivative Term: "+str(self.derivative))
         plt.plot(self.xhistory, self.yhistory)
+        plt.show()

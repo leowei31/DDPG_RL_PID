@@ -29,6 +29,7 @@ for i in range(200):
 
     if i % 25 == 0:
         agent.save_models()
+        env.render()
 
     print('episode ', i, 'score %.2f' % score,
           'trailing 25 games avg %.3f' % np.mean(score_history[-25:]))

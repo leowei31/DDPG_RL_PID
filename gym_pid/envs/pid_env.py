@@ -15,8 +15,7 @@ class PidEnv(gym.Env):
         self.kp = 0.5
         self.ki = 0.5
         self.kd = 0.5
-        self.n = 250 # Simulation points
-        self.done = 0
+        self.n = 200 # Simulation points
 
 
     def step(self, action):
@@ -28,7 +27,7 @@ class PidEnv(gym.Env):
         self.kd = action[2] # Increasing d term improves stability and decreases overshoot
         done = False
 
-        while(self.currpoint[0]< self.n):
+        while(self.currpoint[0]< self.n and done == False ):
             # max x axis of n points 
             self.proportional = self.kp * self.error
             self.integral += self.ki * self.error * self.sample_rate
@@ -42,12 +41,12 @@ class PidEnv(gym.Env):
             self.error = self.setpoint - float(self.currpoint[1])
             self.xhistory.append(self.currpoint[0])
             self.yhistory.append(self.currpoint[1])
-            if(self.currpoint[0]+1 == self.n):
+            if(self.currpoint[1] == self.yhistory[self.currpoint[0]-1]):
                 done = True
 
-        self.state = (self.proportional, self.integral, self.derivative)
-        reward = -abs(self.error)-0.05*float(self.currpoint[0])
-        if reward ==0:
+        self.state = [self.kp, self.ki, self.kd]
+        reward = -abs(self.error) - 0.005*self.currpoint[0]
+        if reward > -10:
             reward = 10
         return np.array(self.state, dtype =np.float32), reward, done, {}
 

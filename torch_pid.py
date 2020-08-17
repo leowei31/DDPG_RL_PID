@@ -12,7 +12,7 @@ agent = Agent(alpha=0.000025, beta=0.00025, input_dims=[3], tau=0.001, env=env,
 np.random.seed(0)
 
 score_history=[]
-for i in range(200):
+for i in range(101):
     obs = env.reset()
     done = False
     score = 0

@@ -173,7 +173,7 @@ class ActorNetwork(nn.Module):
 
 class Agent(object):
     def __init__(self, alpha, beta, input_dims, tau, env, gamma=0.95,
-                 n_actions=3, max_size=1000000, layer1_size=256,
+                 n_actions=2, max_size=1000000, layer1_size=256,
                  layer2_size=128, batch_size=32):
         self.gamma = gamma
         self.tau = tau

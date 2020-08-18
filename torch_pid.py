@@ -5,8 +5,8 @@ import numpy as np
 import utils
 
 env = gym.make('pid-v0')
-agent = Agent(alpha=0.000025, beta=0.00025, input_dims=[3], tau=0.001, env=env,
-              batch_size=64,  layer1_size=256, layer2_size=128, n_actions=3)
+agent = Agent(alpha=0.000025, beta=0.00025, input_dims=[2], tau=0.001, env=env,
+              batch_size=64,  layer1_size=256, layer2_size=128, n_actions=2)
 
 #agent.load_models()
 np.random.seed(0)

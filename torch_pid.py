@@ -5,11 +5,11 @@ import numpy as np
 import utils
 
 env = gym.make('pid-v0')
-agent = Agent(alpha=0.000025, beta=0.00025, input_dims=[2], tau=0.001, env=env,
-              batch_size=64,  layer1_size=256, layer2_size=128, n_actions=2)
+agent = Agent(alpha=0.000025, beta=0.00025, input_dims=[2], tau=0.0001, env=env,
+              batch_size=32,  layer1_size=128, layer2_size=64, n_actions=2)
 
 #agent.load_models()
-np.random.seed(0)
+#np.random.seed(0)
 
 score_history=[]
 for i in range(101):

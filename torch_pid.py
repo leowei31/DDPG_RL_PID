@@ -5,14 +5,14 @@ import numpy as np
 import utils
 
 env = gym.make('pid-v0')
-agent = Agent(alpha=0.000025, beta=0.00025, input_dims=[3], tau=0.001, env=env,
+agent = Agent(alpha=0.00001, beta=0.0001, input_dims=[3], tau=0.0001, env=env,
               batch_size=64,  layer1_size=256, layer2_size=128, n_actions=3)
 
 #agent.load_models()
-np.random.seed(0)
+# np.random.seed(1)
 
 score_history=[]
-for i in range(101):
+for i in range(50):
     obs = env.reset()
     done = False
     score = 0
@@ -27,7 +27,7 @@ for i in range(101):
         #env.render()
     score_history.append(score)
 
-    if i % 25 == 0:
+    if i % 10 == 0:
         agent.save_models()
         env.render()
 

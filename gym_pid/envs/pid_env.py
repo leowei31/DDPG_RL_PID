@@ -47,7 +47,7 @@ class PidEnv(gym.Env):
         self.state = [self.kp, self.ki, self.kd]
         reward = -abs(self.error) - 0.005*self.currpoint[0]
         if reward > -10:
-            reward = 10
+            reward += 10
         return np.array(self.state, dtype =np.float32), reward, done, {}
 
     def reset(self):

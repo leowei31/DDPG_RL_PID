@@ -9,8 +9,12 @@ DDPG algorithm for PID tuning
  DDPG tunes the PID parameters every step  
  PID will give a reward at the end of everystep based on whether it has reached the setpoint or not  
 
-![Figure 1](https://github.com/leowei31/DDPG_RL_PID/tree/master/results/Figure_1.png)
-![Figure 2](https://github.com/leowei31/DDPG_RL_PID/tree/master/results/Figure_2.png)
-![Figure_3](https://github.com/leowei31/DDPG_RL_PID/tree/master/results/Figure3.png)
-![Figure 4](https://github.com/leowei31/DDPG_RL_PID/tree/master/results/Figure_4.png)
-![Figure 5](https://github.com/leowei31/DDPG_RL_PID/tree/master/results/Figure_5.png)
+![After 10 Episodes](results/Figure_1.png)  
+
+![After 20 Episodes](results/Figure_2.png)  
+
+![After 30 Episodes](results/Figure3.png)  
+
+![After 40 Episodes](results/Figure_4.png)  
+
+![After 50 Episodes](results/Figure_5.png)  

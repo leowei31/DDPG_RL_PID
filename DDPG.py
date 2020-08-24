@@ -131,7 +131,7 @@ class ActorNetwork(nn.Module):
         self.bn1 = nn.LayerNorm(self.fc1_dims)
 
         self.fc2 = nn.Linear(self.fc1_dims, self.fc2_dims)
-        #f2 = 0.002
+        # f2 = 0.002
         f2 = 1./np.sqrt(self.fc2.weight.data.size()[0])
         T.nn.init.uniform_(self.fc2.weight.data, -f2, f2)
         T.nn.init.uniform_(self.fc2.bias.data, -f2, f2)
@@ -140,7 +140,7 @@ class ActorNetwork(nn.Module):
         self.bn2 = nn.LayerNorm(self.fc2_dims)
 
         #f3 = 0.004
-        f3 = 0.003
+        f3 = 0.00003
         self.mu = nn.Linear(self.fc2_dims, self.n_actions)
         T.nn.init.uniform_(self.mu.weight.data, -f3, f3)
         T.nn.init.uniform_(self.mu.bias.data, -f3, f3)
@@ -173,7 +173,7 @@ class ActorNetwork(nn.Module):
 
 class Agent(object):
     def __init__(self, alpha, beta, input_dims, tau, env, gamma=0.9,
-                 n_actions=3, max_size=1000000, layer1_size=256,
+                 n_actions=3, max_size=200000, layer1_size=256,
                  layer2_size=128, batch_size=32):
         self.gamma = gamma
         self.tau = tau

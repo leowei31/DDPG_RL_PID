@@ -36,7 +36,7 @@ class PidEnv(gym.Env):
 
         self.state = [self.currpoint[1],self.error, self.kp, self.ki, self.kd]
             
-        reward = -abs(0.05*self.error)
+        reward = -abs(self.error)
         if(self.currpoint[1] == self.setpoint):
             reward = 10
 

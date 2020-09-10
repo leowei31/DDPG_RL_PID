@@ -14,7 +14,7 @@ np.random.seed(0)
 
 score_history=[]
 average_25_score =[]
-num_episodes = 200
+num_episodes = 350
 for episode in range(num_episodes):
     obs = env.reset()
     done = False
@@ -38,7 +38,7 @@ for episode in range(num_episodes):
         # if step == 99:
         #     plt.plot(yhistory)
         #     plt.show()
-        if score < -7000:
+        if score < -40000:
             print("Junk Episode")
             break
             
